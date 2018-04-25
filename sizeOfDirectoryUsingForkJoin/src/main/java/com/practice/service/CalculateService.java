@@ -3,13 +3,13 @@ package com.practice.service;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class CalculateService implements ICalculateService {
 
 	public int calculateSize(File file) {
-		System.out.println(file.exists());
 		return sizeOfFork(file);
 
 	}
@@ -31,7 +31,7 @@ class SpawnFork extends RecursiveTask<Long> {
 
 	private File file;
 	public SpawnFork(File file){
-		this.file=file;
+		this.file=Objects.requireNonNull(file)
 	}
 	@Override
 	protected Long compute() {
