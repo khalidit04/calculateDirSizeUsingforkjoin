@@ -16,7 +16,12 @@ public class CalculateService implements ICalculateService {
 
 	public int sizeOfFork(File file) {
 		ForkJoinPool pool=new ForkJoinPool();
+		try {
 		Long result=pool.invoke(new SpawnFork(file));
+		}
+		finally {
+			pool.shutdown();
+		}
 		return result.intValue();
 
 	}
